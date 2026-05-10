@@ -187,6 +187,8 @@ class BaseProvider(metaclass=abc.ABCMeta):
         Args:
             **kwargs (dict): The provider context (with statement)
         """
+        # Clear results to avoid accumulation when provider is reused across actions/steps
+        self.results = []
         # Pop Keep-internal fields before passing kwargs to the provider
         enrich_alert = kwargs.pop("enrich_alert", [])
         enrich_incident = kwargs.pop("enrich_incident", [])
@@ -387,6 +389,8 @@ class BaseProvider(metaclass=abc.ABCMeta):
         raise NotImplementedError("query() method not implemented")
 
     def query(self, **kwargs: dict):
+        # Clear results to avoid accumulation when provider is reused across actions/steps
+        self.results = []
         # Pop Keep-internal fields before passing kwargs to the provider
         enrich_alert = kwargs.pop("enrich_alert", [])
         audit_enabled = bool(kwargs.pop("audit_enabled", True))
