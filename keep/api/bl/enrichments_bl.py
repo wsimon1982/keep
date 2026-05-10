@@ -6,7 +6,7 @@ import re
 import uuid
 from uuid import UUID
 
-import celpy
+import CelPy as celpy
 import chevron
 import json5
 from elasticsearch import NotFoundError
